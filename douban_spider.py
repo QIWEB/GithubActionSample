@@ -19,14 +19,14 @@ def save_to_db(movie_list):
     for movie in movie_list:
         title = movie.select_one('.title').text.strip()
         rating = float(movie.select_one('.rating_num').text)
-        link = 'https://movie.douban.com' + movie.select_one('a')['href']
+        link =  movie.select_one('a')['href']
         c.execute("INSERT INTO movies VALUES (?, ?, ?)", (title, rating, link))
     conn.commit()
     conn.close()
 
 def main():
-    base_url = 'https://movie.douban.com/top250'
-    for i in range(0, 250, 25):
+    base_url = 'https://movie.douban.com/top350'
+    for i in range(0, 350, 25):
         url = f'{base_url}?start={i}&filter='
         movie_list = get_movie_list(url)
         save_to_db(movie_list)
