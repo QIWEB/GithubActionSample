@@ -126,7 +126,8 @@ def weather_report(this_city):
     print(f"天气信息： {weather}")
     # 3. 发送消息
     #send_weather(access_token, weather)
-    send_message('0a1831c39831412f94e0142bb5708305','今天上海天气',weather)
+    rs=send_message('0a1831c39831412f94e0142bb5708305','今天上海天气',weather)
+    print(f"微信通知信息： {weather}")
 
 import requests
 import json
@@ -147,4 +148,4 @@ def send_message(token, title, content):
     return response_dict
 
 if __name__ == '__main__':
-    weather_report("上海天气")
+    weather_report("上海")
