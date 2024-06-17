@@ -126,8 +126,10 @@ def weather_report(this_city):
     print(f"天气信息： {weather}")
     # 3. 发送消息
     #send_weather(access_token, weather)
-    rs=send_message('0a1831c39831412f94e0142bb5708305','今天上海天气',weather)
-    print(f"微信通知信息： {weather}")
+    rs=send_message('0a1831c39831412f94e0142bb5708305','QIWEB-今天上海天气',weather)
+    print(f"微信通知信息1： {rs}")
+    rs=send_message('0a1831c39831412f94e0142bb5708305','QIWEB-每日一句情话',get_daily_love())
+    print(f"微信通知信息2： {rs}")
 
 import requests
 import json
