@@ -1,0 +1,36 @@
+name: 采集百度头条新闻Scrape and Save Data
+
+on:
+  schedule:
+    - cron: '0 * * * *' # 每小时运行一次，根据需要调整
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  scrape_and_push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.x # 使用你需要的Python版本
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+        #pip install -r requirements.txt # 假设你的依赖在requirements.txt中
+
+    - name: Run the baidu scraper
+      id: scrape
+      run: |
+        python baidu.py # 替换为你的爬虫脚本名
+
+    - name: Commit and Push if changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add scraped_data.csv # 假设爬虫结果保存为scraped_data.csv
+        git commit -m "Add new data $(date)" || echo "No changes to commit"
+        git push origin main
