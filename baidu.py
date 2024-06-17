@@ -25,6 +25,7 @@ def save_to_csv(headlines, filename='baidu_headlines.csv'):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         
         writer.writeheader()
+        writer.writerow('abc,123,qiweb,test')
         for headline in headlines:
             writer.writerow(headline)
 
